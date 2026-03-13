@@ -18,7 +18,7 @@ async function Search() {
         citynotfound()
         return
     }
-    const apiKey = "Your_API_Key_Here"
+    const apiKey = "YOUR_API-KEY-HERE"
     const url =
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
     console.log("Before Fetching the weather data")
@@ -44,6 +44,8 @@ async function Search() {
             conditionText.textContent = data.weather[0].description
             humidityText.textContent = data.main.humidity + " %"
             windText.textContent = data.wind.speed + " m/s"
+            saveCity(city)
+            loadhistory()
         })
         .catch(error => {
             console.error("JSON parsing error:", error)
@@ -95,10 +97,35 @@ function clearError() {
     if (cityErr) {
         cityErr.remove()
     }
-    else if (netErr) {
+    if (netErr) {
         netErr.remove()
     }
-    else if (miscErr){
+    if (miscErr){
         miscErr.remove()
     }
 }
+
+function saveCity(city) {
+    const cities = JSON.parse(localStorage.getItem("cities")) || []
+    if (!cities.includes(city)) {
+        cities.push(city)
+    }
+    
+    localStorage.setItem("cities", JSON.stringify(cities))
+}
+
+function loadhistory() {
+    const history = document.getElementById("history")
+    history.innerHTML = ""
+    const cities = JSON.parse(localStorage.getItem("cities")) || []
+    cities.forEach (city => {
+        const btn = document.createElement("button")
+        btn.textContent = city
+        btn.addEventListener("click", () => {
+            cityInput.value = city
+            Search()
+        })
+        history.appendChild(btn)
+    })
+}
+loadhistory()
