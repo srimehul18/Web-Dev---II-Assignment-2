@@ -18,7 +18,7 @@ async function Search() {
         citynotfound()
         return
     }
-    const apiKey = "YOUR_API-KEY-HERE"
+    const apiKey = "Your API Key here"
     const url =
     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
     console.log("Before Fetching the weather data")
@@ -110,7 +110,7 @@ function saveCity(city) {
     if (!cities.includes(city)) {
         cities.push(city)
     }
-    
+ 
     localStorage.setItem("cities", JSON.stringify(cities))
 }
 
@@ -118,7 +118,7 @@ function loadhistory() {
     const history = document.getElementById("history")
     history.innerHTML = ""
     const cities = JSON.parse(localStorage.getItem("cities")) || []
-    cities.forEach (city => {
+    cities.forEach(city => {
         const btn = document.createElement("button")
         btn.textContent = city
         btn.addEventListener("click", () => {
@@ -127,5 +127,17 @@ function loadhistory() {
         })
         history.appendChild(btn)
     })
+    if (cities.length > 0) {
+        const clr = document.createElement("button")
+        clr.textContent = "Clear History"
+        clr.addEventListener("click", clearhistory)
+        history.appendChild(clr)
+    }
 }
+
+function clearhistory() {
+    localStorage.removeItem("cities")
+    loadhistory()
+}
+
 loadhistory()
