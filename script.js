@@ -10,37 +10,48 @@ const box = document.querySelector(".weather-box")
 const originalWeatherContent = box.innerHTML
 console.log("All Elements have been selected");
 searchBtn.addEventListener("click", Search);
+const consoleLog = document.getElementById("console-log")
 
 async function Search() {
     clearError()
+    consoleLog.innerHTML = ""
     console.log("Search button clicked")
+    consoleLog.innerHTML += "<p>Search button clicked</p>"
     const city = cityInput.value.trim()
     if (!city) {
         citynotfound()
         return
     }
-    const apiKey = "Your_API_KEY_Here"
+    const apiKey = "Your API Key here"
     const url =
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
 
     console.log("Before Fetching the weather data")
+    consoleLog.innerHTML += "<p>Before Fetching the weather data</p>"
     try {
+        consoleLog.innerHTML += "<p>Fetching weather data...(microtask)</p>"
         const res = await fetch(url)
         console.log("After Fetching the weather data")
+        consoleLog.innerHTML += "<p>After Fetching the weather data</p>"
         if (!res.ok) {
             if (res.status === 404) {
-                throw new Error("City not found")
+                consoleLog.innerHTML += "<p>Error! City not found</p>"
+                throw new Error("City not found")              
             }
+
             else if (res.status === 500 || res.status === 429 || res.status === 400) {
+                consoleLog.innerHTML += "<p>Error! Server error or too many requests</p>"
                 throw new Error("Server error or Too many requests")
             }
             else {
+                consoleLog.innerHTML += "<p>Error! Network error</p>"
                 throw new Error("Network error")
             }
         }
         res.json()
             .then(data => {
                 box.innerHTML = originalWeatherContent;
+                consoleLog.innerHTML += "<p>Parsing JSON data</p>"
 
                 const cityText = document.getElementById("city");
                 const tempText = document.getElementById("temp");
@@ -53,6 +64,7 @@ async function Search() {
                 conditionText.textContent = data.weather[0].description;
                 humidityText.textContent = data.main.humidity + " %";
                 windText.textContent = data.wind.speed + " m/s";
+                consoleLog.innerHTML += "<p>Data upload completed</p>"
 
                 saveCity(city);
                 loadhistory();
