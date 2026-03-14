@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +8,31 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
     <h1>Async Weather Tracker</h1>
-    <div class = "container">
-        <div class = "search">
+    <div class="container">
+        <div class="search">
             <h3> Search City </h3>
-            <input type = "text" id = "city-input" placeholder="Enter City">
-            <button id = "search-btn">Search</button>
+            <input type="text" id="city-input" placeholder="Enter City">
+            <button id="search-btn">Search</button>
 
             <h3> Search History</h3>
-            <div id = "history"></div>
+            <div id="history"></div>
         </div>
-        <div class = "weather-box">
-            <h3> Weather Details </h3>
-            <p>City: <span id="city"></span></p>
-            <p>Temp: <span id="temp"></span></p>
-            <p>Weather: <span id="condition"></span></p>
-            <p>Humidity: <span id="humidity"></span></p>
-            <p>Wind: <span id="wind"></span></p>
+        <div class="weather-box">
+            <h3>Weather Info</h3>
+            <div id="weather-data">
+                <p>City: <span id="city"></span></p>
+                <p>Temp: <span id="temp"></span></p>
+                <p>Weather: <span id="condition"></span></p>
+                <p>Humidity: <span id="humidity"></span></p>
+                <p>Wind: <span id="wind"></span></p>
+            </div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
+
 </html>
