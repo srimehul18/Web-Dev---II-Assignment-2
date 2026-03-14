@@ -107,4 +107,13 @@ h1{
     padding: 10px;
     border-radius: 5px;
     margin: 10px;
+    overflow-y: auto;
+    border-left: 2px solid #f26522;
+}
+
+.entry{
+    border-left: 4px solid #d9531e;
+    margin: 5px 0;
+    padding-left: 2px;
+    font-size: 1.05rem;
 }

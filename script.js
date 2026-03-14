@@ -16,7 +16,7 @@ async function Search() {
     clearError()
     consoleLog.innerHTML = ""
     console.log("Search button clicked")
-    consoleLog.innerHTML += "<p>Search button clicked</p>"
+    consoleLog.innerHTML += `<p class = "entry">Search button clicked</p>`
     const city = cityInput.value.trim()
     if (!city) {
         citynotfound()
@@ -27,31 +27,31 @@ async function Search() {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
 
     console.log("Before Fetching the weather data")
-    consoleLog.innerHTML += "<p>Before Fetching the weather data</p>"
+    consoleLog.innerHTML += `<p class = "entry">Before Fetching the weather data</p>`
     try {
-        consoleLog.innerHTML += "<p>Fetching weather data...(microtask)</p>"
+        consoleLog.innerHTML += `<p class = "entry">Fetching weather data...(microtask)</p>`
         const res = await fetch(url)
         console.log("After Fetching the weather data")
-        consoleLog.innerHTML += "<p>After Fetching the weather data</p>"
+        consoleLog.innerHTML += `<p class = "entry">After Fetching the weather data</p>`
         if (!res.ok) {
             if (res.status === 404) {
-                consoleLog.innerHTML += "<p>Error! City not found</p>"
+                consoleLog.innerHTML += `<p class = "entry">Error! City not found</p>`
                 throw new Error("City not found")              
             }
 
             else if (res.status === 500 || res.status === 429 || res.status === 400) {
-                consoleLog.innerHTML += "<p>Error! Server error or too many requests</p>"
+                consoleLog.innerHTML += `<p class = "entry">Error! Server error or too many requests</p>`
                 throw new Error("Server error or Too many requests")
             }
             else {
-                consoleLog.innerHTML += "<p>Error! Network error</p>"
+                consoleLog.innerHTML += `<p class = "entry">Error! Network error</p>`
                 throw new Error("Network error")
             }
         }
         res.json()
             .then(data => {
                 box.innerHTML = originalWeatherContent;
-                consoleLog.innerHTML += "<p>Parsing JSON data</p>"
+                consoleLog.innerHTML += `<p class = "entry">Parsing JSON data</p>`
 
                 const cityText = document.getElementById("city");
                 const tempText = document.getElementById("temp");
@@ -64,7 +64,7 @@ async function Search() {
                 conditionText.textContent = data.weather[0].description;
                 humidityText.textContent = data.main.humidity + " %";
                 windText.textContent = data.wind.speed + " m/s";
-                consoleLog.innerHTML += "<p>Data upload completed</p>"
+                consoleLog.innerHTML += `<p class = "entry">Data upload completed</p>`
 
                 saveCity(city);
                 loadhistory();
@@ -79,7 +79,7 @@ async function Search() {
         if (error.message === "City not found") {
             citynotfound()
         }
-        else if (error.message === "Server error or Too many requests") {
+        else if (error.message === `Server error or Too many requests`) {
             miscerr()
         }
         else {
