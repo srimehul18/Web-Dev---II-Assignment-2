@@ -1,15 +1,15 @@
 console.log("Script Started")
-const cityInput = document.getElementById('city-input');
-const searchBtn = document.getElementById('search-btn');
-const cityText = document.getElementById("city");
-const tempText = document.getElementById("temp");
-const conditionText = document.getElementById("condition");
-const humidityText = document.getElementById("humidity");
-const windText = document.getElementById("wind");
+const cityInput = document.getElementById('city-input') 
+const searchBtn = document.getElementById('search-btn') 
+const cityText = document.getElementById("city") 
+const tempText = document.getElementById("temp") 
+const conditionText = document.getElementById("condition") 
+const humidityText = document.getElementById("humidity") 
+const windText = document.getElementById("wind") 
 const box = document.querySelector(".weather-box")
 const originalWeatherContent = box.innerHTML
-console.log("All Elements have been selected");
-searchBtn.addEventListener("click", Search);
+console.log("All Elements have been selected") 
+searchBtn.addEventListener("click", Search) 
 const consoleLog = document.getElementById("console-log")
 
 async function Search() {
@@ -22,7 +22,7 @@ async function Search() {
         citynotfound()
         return
     }
-    const apiKey = "Your API Key here"
+    const apiKey = "Your API Key Here"
     const url =
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
 
@@ -50,24 +50,25 @@ async function Search() {
         }
         res.json()
             .then(data => {
-                box.innerHTML = originalWeatherContent;
+                consoleLog.innerHTML += `<p class="entry">Promise resolved (microtask queue)</p>`
+                box.innerHTML = originalWeatherContent 
                 consoleLog.innerHTML += `<p class = "entry">Parsing JSON data</p>`
 
-                const cityText = document.getElementById("city");
-                const tempText = document.getElementById("temp");
-                const conditionText = document.getElementById("condition");
-                const humidityText = document.getElementById("humidity");
-                const windText = document.getElementById("wind");
+                const cityText = document.getElementById("city") 
+                const tempText = document.getElementById("temp") 
+                const conditionText = document.getElementById("condition") 
+                const humidityText = document.getElementById("humidity") 
+                const windText = document.getElementById("wind") 
 
-                cityText.textContent = data.name;
-                tempText.textContent = data.main.temp + " °C";
-                conditionText.textContent = data.weather[0].description;
-                humidityText.textContent = data.main.humidity + " %";
-                windText.textContent = data.wind.speed + " m/s";
+                cityText.textContent = data.name 
+                tempText.textContent = data.main.temp + " °C" 
+                conditionText.textContent = data.weather[0].description 
+                humidityText.textContent = data.main.humidity + " %" 
+                windText.textContent = data.wind.speed + " m/s" 
                 consoleLog.innerHTML += `<p class = "entry">Data upload completed</p>`
 
-                saveCity(city);
-                loadhistory();
+                saveCity(city) 
+                loadhistory() 
             })
             .catch(error => {
                 console.error("JSON parsing error:", error)
@@ -95,7 +96,7 @@ function citynotfound() {
     cityerr.textContent = "City not found"
     box.innerHTML = `
         <h3>Weather Info</h3>
-        <p style="color:red; margin-top:10px;">City not found</p>
+        <p style="color:red  margin-top:10px ">City not found</p>
     `
 }
 
@@ -106,7 +107,7 @@ function neterr() {
     neterr.textContent = "Network Error. Please try again."
     box.innerHTML = `
         <h3>Weather Info</h3>
-        <p style="color:red; margin-top:10px;">Network Error. Please try again.</p>
+        <p style="color:red  margin-top:10px ">Network Error. Please try again.</p>
     `
 }
 
@@ -117,7 +118,7 @@ function miscerr() {
     miscerr.textContent = "Server Error. Please try again later."
     box.innerHTML = `
         <h3>Weather Info</h3>
-        <p style="color:red; margin-top:10px;">Server Error. Please try again later.</p>
+        <p style="color:red  margin-top:10px ">Server Error. Please try again later.</p>
     `
 }
 
